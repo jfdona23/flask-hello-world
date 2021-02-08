@@ -1,0 +1,9 @@
+*.md
+.dockerignore
+.gitignore
+.git
+Dockerfile
+
+# Ignore same as .gitignore
+venv
+.vscode
