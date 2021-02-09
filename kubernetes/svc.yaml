@@ -1,0 +1,10 @@
+kind: kind: Service
+apiVersion: v1
+metadata:
+  name:  flask-hello-world
+spec:
+  selector:
+    app:  hello-world
+  type:  NodePort
+  ports:
+    targetPort:  8000
