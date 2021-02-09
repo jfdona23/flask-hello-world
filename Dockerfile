@@ -2,7 +2,7 @@ FROM python:slim
 
 WORKDIR /app
 
-COPY * ./
+COPY app/* ./
 
 RUN pip install -r requirements.txt
 
