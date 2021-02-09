@@ -7,4 +7,5 @@ spec:
     app:  hello-world
   type:  NodePort
   ports:
+  - name: flask-hello-world-port
     targetPort:  8000
