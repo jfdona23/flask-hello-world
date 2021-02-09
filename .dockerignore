@@ -3,6 +3,7 @@
 .gitignore
 .git
 Dockerfile
+kubernetes
 
 # Ignore same as .gitignore
 venv
