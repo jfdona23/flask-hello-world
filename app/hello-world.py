@@ -7,7 +7,6 @@ flask_port = os.environ.get("PORT", "8080")
 flask_debug = os.environ.get("DEBUG", False)
 
 app = Flask(__name__)
-app.debug
 
 
 @app.route("/")
