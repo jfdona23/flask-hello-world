@@ -14,7 +14,7 @@ on:
 jobs:
   python_lint:
     runs-on: ubuntu-latest
-    if: github.ref == refs/heads/dev
+    if: github.ref == 'refs/heads/dev'
     steps:
       - uses: actions/checkout@v2
 
