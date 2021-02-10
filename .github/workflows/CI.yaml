@@ -84,7 +84,8 @@ jobs:
           CURRENT_IMG=$(grep "tag\:\ \"" charts/flask-hello-world/values.yaml)
           NEW_IMG=${{ needs.docker_push.outputs.docker_meta }}
           sed -i "s/$CURRENT_IMG/\ \ tag\:\ \"$NEW_IMG\"/" charts/flask-hello-world/values.yaml
-          CURRENT_CHART=$(grep "version\:\ \"" charts/flask-hello-world/Chart.yaml)
+
+          CURRENT_CHART=$(grep "version\:\ " charts/flask-hello-world/Chart.yaml)
           NEW_CHART=${{ needs.docker_push.outputs.docker_meta }}
           sed -i "s/$CURRENT_CHART/\ \ version\:\ \$NEW_CHART/" charts/flask-hello-world/Chart.yaml
 
