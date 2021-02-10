@@ -79,13 +79,12 @@ jobs:
           # persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           # fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
           repository: jfdona23/helm-personal-repo
+          ref: charts/flask-hello-world
           token: ${{ secrets.GH_ACTIONS_TOKEN }}
 
       # Switch to the proper branch and update image version and chart version
       - name: Update helm image version and chart version
         run: |
-          git checkout charts/flask-hello-world
-
           CURRENT_IMG=$(grep "tag\:\ \"" charts/flask-hello-world/values.yaml)
           NEW_IMG=${{ needs.docker_push.outputs.docker_meta }}
           sed -i "s/$CURRENT_IMG/\ \ tag\:\ \"$NEW_IMG\"/" charts/flask-hello-world/values.yaml
