@@ -95,4 +95,5 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GH_ACTIONS_TOKEN }}
+          repository: jfdona23/helm-personal-repo
           branch: master
