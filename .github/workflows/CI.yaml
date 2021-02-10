@@ -1,18 +1,45 @@
-name: Docker publish
-
+name: CI
 on:
   push:
     branches:
-      - master
-    tags:
-      - v*
+      - dev
+      - release
+    paths:
+      - "app/**"
   pull_request:
+    paths:
+      - "app/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-  docker_publish:
+  python_lint:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Code Linting and formatting
+      - name: Python Code Quality and Lint
+        uses: ricardochaves/python-lint@v1.3.0
+        with:
+          python-root-list: "app"
+          use-pylint: false
+          use-pycodestyle: false
+          use-flake8: true
+          use-black: true
+          use-mypy: false
+          use-isort: false
+          extra-pylint-options: ""
+          extra-pycodestyle-options: ""
+          extra-flake8-options: ""
+          extra-black-options: ""
+          extra-mypy-options: ""
+          extra-isort-options: ""
+
+  docker_push:
+    needs: [python_lint]
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -39,6 +66,6 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v2.2.2
         with:
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && github.ref == refs/heads/release}}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
