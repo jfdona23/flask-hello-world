@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from socket import getfqdn
 
 flask_host = os.environ.get("HOST", "0.0.0.0")
 flask_port = os.environ.get("PORT", "8080")
@@ -11,7 +12,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return "Hello, World!! =)"
+    return f"Hello, World from {getfqdn()}!! =)"
 
 
 if __name__ == "__main__":
