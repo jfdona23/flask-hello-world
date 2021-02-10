@@ -79,11 +79,15 @@ jobs:
           repository: jfdona23/helm-personal-repo
           token: ${{ secrets.GH_ACTIONS_TOKEN }}
 
-      - name: Update helm image version
+      - name: Update helm image version and chart version
         run: |
-          CURRENT_TAG=$(grep "tag:\ \"" charts/flask-hello-world/values.yaml)
-          NEW_TAG=${{ needs.docker_push.outputs.docker_meta }}
-          sed -i "s/$CURRENT_TAG/\ \ tag\:\ \"$NEW_TAG\"/" charts/flask-hello-world/values.yaml
+          CURRENT_IMG=$(grep "tag:\ \"" charts/flask-hello-world/values.yaml)
+          NEW_IMG=${{ needs.docker_push.outputs.docker_meta }}
+          sed -i "s/$CURRENT_IMG/\ \ tag\:\ \"$NEW_IMG\"/" charts/flask-hello-world/values.yaml
+
+          CURRENT_CHART=$(grep "version:\ \"" charts/flask-hello-world/Chart.yaml)
+          NEW_CHART=${{ needs.docker_push.outputs.docker_meta }}
+          sed -i "s/$CURRENT_CHART/\ \ version\:\ \"$NEW_CHART\"/" charts/flask-hello-world/Chart.yaml
 
       - name: Commit changes
         run: |
