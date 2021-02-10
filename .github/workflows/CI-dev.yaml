@@ -1,14 +1,9 @@
-name: CI
+name: CI-dev
 on:
   push:
     branches:
       - dev
-      - release
-    paths:
-      - "app/**"
   pull_request:
-    paths:
-      - "app/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -66,6 +61,6 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v2.2.2
         with:
-          push: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/release' && startsWith(github.ref, 'refs/tags/v') }}
+          push: False
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
