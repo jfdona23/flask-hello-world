@@ -1,7 +1,8 @@
-name: CI-release
+name: CI
 on:
   push:
     branches:
+      - dev
       - release
     tags:
       - v*
@@ -12,6 +13,7 @@ on:
 
 jobs:
   python_lint:
+    if: github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/release'
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -50,7 +52,6 @@ jobs:
           images: jfdona23/flask-hello-world
           tag-semver: |
             {{version}}
-            {{major}}.{{minor}}
 
       # Docker login
       - name: Docker Login
