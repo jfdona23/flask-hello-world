@@ -83,7 +83,7 @@ jobs:
         run: |
           CURRENT_TAG=$(grep "tag:\ \"" charts/flask-hellow-world/values.yaml)
           NEW_TAG=${{ needs.docker_push.outputs.docker_meta }}
-          sed -i "s/$CURRENT_TAG/$NEW_TAG/" charts/flask-hellow-world/values.yaml
+          sed -i "s/$CURRENT_TAG/\ \ tag\:\ \"$NEW_TAG\"/" charts/flask-hellow-world/values.yaml
 
       - name: Commit changes
         run: |
