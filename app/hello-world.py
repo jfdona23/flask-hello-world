@@ -12,7 +12,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return f"<br><p><h1>&nbsp;&nbsp;&nbsp;&nbsp;Hello World, from {getfqdn()}  =)</h1>"
+    return (
+        f"<h1>"
+        f"<br><p>&nbsp;&nbsp;&nbsp;&nbsp;"
+        f"Hello, World from {getfqdn()}  =)"
+        f"</h1>"
+    )
 
 
 if __name__ == "__main__":
