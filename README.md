@@ -1,1 +1,1 @@
-## Simple Hello World app made with Python + Flask
+## Simple Hello World app made with Flask and Docker
